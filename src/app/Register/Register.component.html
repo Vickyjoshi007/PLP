@@ -1,0 +1,140 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <h2 class="mb-4">Register Form</h2>
+<form [formGroup]="registerForm" class="border p-4" (ngSubmit)="onSubmit()" novalidate>
+  <div formGroupName="credential">
+    <div class="form-group">
+      <label for="userName">UserName</label>
+      <input type="text" class="form-control" formControlName="userName">
+    </div>
+    <span *ngIf="registerForm.get('credential.userName')?.errors?.['required']
+    && (registerForm.get('credential.userName')?.dirty
+    || registerForm.get('credential.userName')?.touched)">
+      Please enter username
+    </span>
+    <span *ngIf="registerForm.get('credential.UserName')?.errors?.['required']
+    && registerForm.get('credential.UserName')?.touched">
+      Please enter UserName
+    </span>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" class="form-control" formControlName="email">
+      <span *ngIf="registerForm.get('credential.email')?.errors?.['required'] && registerForm.get('credential.email')?.touched">
+        Please enter email
+      </span>
+      <span *ngIf="registerForm.get('credential.email')?.errors?.['email'] && registerForm.get('credential.email')?.touched">
+        Please enter a valid email
+      </span>
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" class="form-control" formControlName="password">
+      <span *ngIf="registerForm.get('credential.password')?.errors?.['required'] && registerForm.get('credential.password')?.touched">
+        Please enter password
+      </span>
+    </div>
+  </div>
+
+  <div formGroupName="personalInfo">
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="firstName">First Name</label>
+        <input type="text" class="form-control" formControlName="firstName">
+        <span *ngIf="registerForm.get('personalInfo.firstName')?.errors?.['required'] && registerForm.get('personalInfo.firstName')?.touched">
+          Please enter first name
+        </span>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="lastName">Last Name</label>
+        <input type="text" class="form-control" formControlName="lastName">
+        <span *ngIf="registerForm.get('personalInfo.lastName')?.errors?.['required'] && registerForm.get('personalInfo.lastName')?.touched">
+          Please enter last name
+        </span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="city">City</label>
+      <input type="text" class="form-control" formControlName="city">
+      <span *ngIf="registerForm.get('personalInfo.city')?.errors?.['required'] && registerForm.get('personalInfo.city')?.touched">
+        Please enter city
+      </span>
+    </div>
+
+    <div class="form-group">
+      <label for="pinCode">Pin Code</label>
+      <input type="text" class="form-control" formControlName="pinCode">
+      <span *ngIf="registerForm.get('personalInfo.pinCode')?.errors?.['required'] && registerForm.get('personalInfo.pinCode')?.touched">
+        Please enter pin code
+      </span>
+    </div>
+
+    <div class="form-group">
+      <label for="dateOfBirth">Date of Birth</label>
+      <input type="text"
+      formControlName="dateOfBirth"
+      placeholder="Datepicker"
+      class="form-control"
+      bsDatepicker
+      [daysDisabled]="[6,0]"
+      [bsConfig]="{ isAnimated: true, dateInputFormat: 'YYYY-MM-DD' }">
+      <span *ngIf="registerForm.get('personalInfo.dateOfBirth')?.errors?.['required'] && registerForm.get('personalInfo.dateOfBirth')?.touched">
+        Please enter date of birth
+      </span>
+    </div>
+
+    <div class="form-group">
+      <label for="gender">Gender</label>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" formControlName="gender" value="Male">
+        <label class="form-check-label">Male</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" formControlName="gender" value="Female">
+        <label class="form-check-label">Female</label>
+      </div>
+      <span *ngIf="registerForm.get('personalInfo.gender')?.errors?.['required'] && registerForm.get('personalInfo.gender')?.touched">
+        Please select gender
+      </span>
+    </div>
+  </div>
+
+  <div formGroupName="additionalInfo">
+    <div class="form-group">
+      <label for="role">Role</label>
+      <ng-multiselect-dropdown
+      [placeholder]="'custom placeholder'"
+      [settings]="dropdownSettings"
+      [data]="role"
+      formControlName="role"
+      (onSelect)="onItemSelect($event)"
+      (onSelectAll)="onSelectAll($event)"
+    >
+    </ng-multiselect-dropdown>
+
+
+      <span *ngIf="registerForm.get('additionalInfo.role')?.errors?.['required'] && registerForm.get('additionalInfo.role')?.touched">
+        Please select role
+      </span>
+    </div>
+
+    <div class="form-group">
+      <label for="photos">Photos</label>
+      <!-- <input type="file" class="form-control" formControlName="photo" (change)="onSelectedFile($event)"> -->
+      <input type="file" class="form-control" formControlName="photo" (change)="onSelectedFile($event)">
+      <span *ngIf="registerForm.get('additionalInfo.photo')?.errors?.['required'] && registerForm.get('additionalInfo.photos')?.touched">
+        Please upload photo
+      </span>
+    </div>
+  </div>
+
+  <div class="form-group text-right mt-4">
+    <button class="btn btn-primary mr-2" type="submit" [disabled]="!registerForm.valid">Save</button>
+    <button class="btn btn-secondary" type="button">Cancel</button>
+  </div>
+</form>
+</div>
+</div>
+</div>

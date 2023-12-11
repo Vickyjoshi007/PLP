@@ -1,0 +1,66 @@
+<nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarColor01" >
+      <ul class="navbar-nav me-auto"  *ngIf="isLoggedIn">
+        <li class="nav-item">
+          <a class="nav-link active" href="#">Home
+            <span class="visually-hidden">(current)</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/course">Courses</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Pricing</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">About</a>
+        </li>
+
+
+
+
+      </ul>
+      <form *ngIf="!isLoggedIn" class="d-flex" style="float: right; right: auto;">
+        <input
+        name="userName"
+        [(ngModel)]="model.userName"
+          class="form-control me-2"
+          type="text"
+          placeholder="UserName"
+          aria-label="Search"
+        />
+        <input
+        name="password"
+[(ngModel)]="model.password"
+          class="form-control me-2"
+          type="text"
+          placeholder="Password"
+          aria-label="Search"
+        />
+        <button class="btn btn-success" type="submit" (click)="login()">Login</button>
+        <button class="btn btn-primary" type="submit" routerLink="/register">Register</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="row justify-content-end"  *ngIf="service.isLoggedIn() |async as UserDto ">
+    <div class="btn-group" dropdown>
+      <button id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle"
+              aria-controls="dropdown-basic">
+        Welcome {{UserDto.userName | uppercase}} <span class="caret"></span>
+      </button>
+      <img src="{{UserDto.photoUrl}}" alt="">
+      <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"
+          role="menu" aria-labelledby="button-basic">
+        <li role="menuitem"><a class="dropdown-item" routerLink="/member:edit" href="#">Edit Profile</a></li>
+        <!-- <li role="menuitem"><a class="dropdown-item" (click)="LogOut()">LogOut</a></li> -->
+      </ul>
+    </div>
+  </div>
+
+</nav>
