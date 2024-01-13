@@ -62,7 +62,10 @@ export class CourseComponent implements OnInit {
       });
 
       this.courseService.SaveCourse(formData).subscribe(res=>{
-
+        if(res.status=='success')
+        {
+          alert('Course Created Successfully');
+        }
       })
     }
   }

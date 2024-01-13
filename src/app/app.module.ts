@@ -4,7 +4,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RegisterComponent } from './Register/Register.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { ReactiveFormsModule,FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDatepickerConfig, BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
@@ -13,6 +12,11 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { LoginComponent } from './login/login.component';
 import { CourseComponent } from './course/course.component';
 import { AuthInterceptorInterceptor } from './Interceptor/auth-interceptor.interceptor';
+import { CourseListComponent } from './course-list/course-list.component';
+import { CourseDetailsComponent } from './course-details/course-details.component';
+import { CourseEditDirectiveDirective } from './directive/CourseEditDirective.directive';
+import { CacheInterceptor } from './Interceptor/cache.interceptor';
+import { SharedModule } from './shared/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -20,14 +24,16 @@ import { AuthInterceptorInterceptor } from './Interceptor/auth-interceptor.inter
       RegisterComponent,
       NavBarComponent,
       LoginComponent,
-      CourseComponent
+      CourseComponent,
+      CourseListComponent,
+      CourseDetailsComponent,
+      CourseEditDirectiveDirective
    ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule,
-    FormsModule,
+    SharedModule,
     BrowserAnimationsModule,
     BsDatepickerModule.forRoot(),
     NgMultiSelectDropDownModule.forRoot()
@@ -36,6 +42,9 @@ import { AuthInterceptorInterceptor } from './Interceptor/auth-interceptor.inter
     DatePipe,
     {
       provide:HTTP_INTERCEPTORS,useClass:AuthInterceptorInterceptor,multi:true
+    },
+    {
+      provide:HTTP_INTERCEPTORS,useClass:CacheInterceptor,multi:true
     }
   ],
   bootstrap: [AppComponent]

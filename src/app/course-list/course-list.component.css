@@ -1,0 +1,12 @@
+   /* Additional styles can be added here */
+   .course-box {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  .course-logo {
+    width: 50px; /* Adjust size as needed */
+    height: auto;
+    margin-bottom: 10px;
+  }

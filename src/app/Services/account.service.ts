@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { RegisterDTO } from '../model/register';
 import { UserDto } from '../model/User';
-import { BehaviorSubject, Observable, map } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, map } from 'rxjs';
 // import { environment } from '../environments/environment';
 
 @Injectable({
@@ -13,14 +13,14 @@ export class AccountService {
   private currentUser = new BehaviorSubject<UserDto | null>(null);
 
   constructor(private http: HttpClient) {
-    this.currentUser.next(JSON.parse(localStorage.getItem('user')!))
+    this.currentUser.next(JSON.parse(localStorage.getItem('user')!));
   }
 
   registerUser(RegisterDTO: FormData) {
     return this.http.post<UserDto>(`${this.url}Register`, RegisterDTO).pipe(
       map((user) => {
         localStorage.setItem('user', JSON.stringify(user));
-        this.currentUser.next(user)
+        this.currentUser.next(user);
         return user;
       })
     );
@@ -30,7 +30,7 @@ export class AccountService {
     return this.http.post<UserDto>(`${this.url}login`, loginDTO).pipe(
       map((user) => {
         localStorage.setItem('user', JSON.stringify(user));
-        this.currentUser.next(user)
+        this.currentUser.next(user);
         return user;
       })
     );
@@ -43,5 +43,10 @@ export class AccountService {
 
   isLoggedIn() {
     return this.currentUser.asObservable();
+  }
+
+  createTask = new Subject<string>();
+  saveTask(value: string) {
+    this.createTask.next(value);
   }
 }

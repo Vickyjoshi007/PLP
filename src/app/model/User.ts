@@ -4,4 +4,5 @@ export class UserDto {
   photoUrl: string;
   knownAs: string;
   gender: string;
+  role: string[];
 }

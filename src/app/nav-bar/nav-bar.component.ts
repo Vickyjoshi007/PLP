@@ -1,6 +1,7 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { AccountService } from '../Services/account.service';
 import { Router } from '@angular/router';
+import { LoginComponent } from '../login/login.component';
 
 @Component({
   selector: 'app-nav-bar',
@@ -13,22 +14,48 @@ export class NavBarComponent implements OnInit {
     private cd: ChangeDetectorRef,
     private router: Router
   ) {}
-  model: any = {};
-  isLoggedIn: boolean = false;
+  // model: any = {};
+  // isLoggedIn: boolean = false;
+  // taskvalue:string
+  // @Output() childComponent=new EventEmitter<string>
+  // @ViewChild(LoginComponent) loginComponent!: LoginComponent;
+  // @ViewChild('titleHeader') titleHeader:ElementRef
+
+  // // ngAfterViewInit(){
+  // //   if(LoginComponent){
+  // //     this.loginComponent.message
+  // //   }
+  // // }
 
   ngOnInit() {
-    this.service.isLoggedIn().subscribe((user) => {
-      this.isLoggedIn = !!user;
-    });
+    // this.service.isLoggedIn().subscribe((user) => {
+    //   this.isLoggedIn = !!user;
+    // });
+
   }
 
-  login() {
-    this.service.login(this.model).subscribe((res) => {
-      if (res) {
-        alert('logged In Successful');
-        this.isLoggedIn = true;
-        this.router.navigateByUrl('/course');
-      }
-    });
-  }
+  // Submit(){
+  //   this.service.saveTask(this.taskvalue)
+  // }
+
+  // getLogin(){
+  //   debugger;
+  //   console.log(this.titleHeader.nativeElement.value)
+
+  //   if(LoginComponent){
+  //    this.taskvalue= this.loginComponent.message
+  //   }
+  // }
+
+
+
+  // login() {
+  //   this.service.login(this.model).subscribe((res) => {
+  //     if (res) {
+  //       alert('logged In Successful');
+  //       this.isLoggedIn = true;
+  //       this.router.navigateByUrl('/course');
+  //     }
+  //   });
+  // }
 }

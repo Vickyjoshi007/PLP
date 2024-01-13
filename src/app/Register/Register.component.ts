@@ -16,8 +16,13 @@ export class RegisterComponent implements OnInit {
   dropdownSettings:any = {};
   selectedFile:File;
   UserDto:UserDto
+  taskValue:string
 
   ngOnInit() {
+
+    this.registerService.createTask.subscribe(x=>{
+      this.taskValue=x
+    })
 
     this.role = [
       { item_id: 1, item_text: 'Admin' },
@@ -118,4 +123,7 @@ export class RegisterComponent implements OnInit {
       });
     }
   }
+
+
+
 }

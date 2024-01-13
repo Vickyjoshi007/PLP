@@ -1,7 +1,7 @@
 
 <div class="container mt-3">
   <h2 class="mb-4">Add New Course</h2>
-  <form [formGroup]="courseForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="courseForm" (ngSubmit)="updateCourse()">
     <div class="mb-3">
       <label for="courseName" class="form-label">Course Name</label>
       <input type="text" class="form-control" formControlName="courseName" id="courseName">

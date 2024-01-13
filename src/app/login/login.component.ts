@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AccountService } from '../Services/account.service';
 
 @Component({
   selector: 'app-login',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  constructor(private registerService: AccountService) { }
+
+  taskValue:string
+  message:string="This is original message."
 
   ngOnInit() {
+    this.registerService.createTask.subscribe(x=>{
+      this.taskValue=x
+    })
   }
 
 }
